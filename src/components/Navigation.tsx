@@ -71,11 +71,12 @@ const Navigation = () => {
                 >
                   <div className="relative overflow-hidden rounded-lg">
                     <img
-                      src="/images/realstate-removebg-preview.png"
+                      src="/images/reeeaallll.png"
                       alt="Real Estate Crafters Logo"
                       className="h-10 sm:h-16 md:h-20 lg:h-20 w-auto object-contain transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:rotate-3 transform animate-pulse"
                       style={{ 
                         maxWidth: "150px",
+                        padding: "3px",
                         animation: "heartbeat 2s ease-in-out infinite"
                       }}
                     />
