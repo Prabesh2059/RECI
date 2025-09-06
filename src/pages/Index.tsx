@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, MapPin, DollarSign, Home, Users, Wrench, Bed, Bath, Square } from "lucide-react";
+import { Search, MapPin, DollarSign, Home, Users, Wrench, Bed, Bath, Square, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -66,7 +66,7 @@ const LandUnitCalculator = () => {
   const DAAM_TO_SQFT = 21.39;
 
   // Helper: clear all except the one being edited
-  const clearOthers = (except) => {
+  const clearOthers = (except: string) => {
     if (except !== "bigha") setBigha("");
     if (except !== "kattha") setKattha("");
     if (except !== "dhur") setDhur("");
@@ -78,7 +78,7 @@ const LandUnitCalculator = () => {
   };
 
   // Conversion logic
-  const handleChange = (unit, value) => {
+  const handleChange = (unit: string, value: string) => {
     if (!/^\d*\.?\d*$/.test(value)) return; // Only allow numbers
     setActive(unit);
     clearOthers(unit);
@@ -190,49 +190,49 @@ const LandUnitCalculator = () => {
   };
 
   return (
-    <Card className="mt-6 mb-6 max-w-4xl mx-auto bg-white/95 border border-green-200 shadow-xl rounded-2xl animate-fade-in-up">
-      <CardContent className="p-6">
-        <h3 className="text-xl font-bold text-[#006d4e] mb-4 text-center">Land Unit Converter</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Bigha</label>
+   <Card className="mt-4 sm:mt-6 mb-4 sm:mb-6 max-w-full sm:max-w-4xl mx-auto bg-white/95 border border-green-200 shadow-xl rounded-xl sm:rounded-2xl animate-fade-in-up">
+      <CardContent className="p-4 sm:p-6 overflow-x-auto"> {/* added overflow-x-auto */}
+        <h3 className="text-lg sm:text-xl font-bold text-[#006d4e] mb-3 sm:mb-4 text-center">Land Unit Converter</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"> {/* changed to grid-cols-1 for mobile */}
+          <div className="min-w-0"> {/* added min-w-0 */}
+            <label className="block text-gray-700 font-medium mb-1 text-xs sm:text-sm">Bigha</label>
             <input type="text" value={bigha} onChange={e => handleChange("bigha", e.target.value)}
-              className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
+              className="w-full min-w-0 border-2 border-green-200 rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
           </div>
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Kattha</label>
+          <div className="min-w-0">
+            <label className="block text-gray-700 font-medium mb-1 text-xs sm:text-sm">Kattha</label>
             <input type="text" value={kattha} onChange={e => handleChange("kattha", e.target.value)}
-              className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
+              className="w-full min-w-0 border-2 border-green-200 rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
           </div>
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Dhur</label>
+          <div className="min-w-0">
+            <label className="block text-gray-700 font-medium mb-1 text-xs sm:text-sm">Dhur</label>
             <input type="text" value={dhur} onChange={e => handleChange("dhur", e.target.value)}
-              className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
+              className="w-full min-w-0 border-2 border-green-200 rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
           </div>
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Ropani</label>
+          <div className="min-w-0">
+            <label className="block text-gray-700 font-medium mb-1 text-xs sm:text-sm">Ropani</label>
             <input type="text" value={ropani} onChange={e => handleChange("ropani", e.target.value)}
-              className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
+              className="w-full min-w-0 border-2 border-green-200 rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
           </div>
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Aana</label>
+          <div className="min-w-0">
+            <label className="block text-gray-700 font-medium mb-1 text-xs sm:text-sm">Aana</label>
             <input type="text" value={aana} onChange={e => handleChange("aana", e.target.value)}
-              className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
+              className="w-full min-w-0 border-2 border-green-200 rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
           </div>
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Paisa</label>
+          <div className="min-w-0">
+            <label className="block text-gray-700 font-medium mb-1 text-xs sm:text-sm">Paisa</label>
             <input type="text" value={paisa} onChange={e => handleChange("paisa", e.target.value)}
-              className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
+              className="w-full min-w-0 border-2 border-green-200 rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
           </div>
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Daam</label>
+          <div className="min-w-0">
+            <label className="block text-gray-700 font-medium mb-1 text-xs sm:text-sm">Daam</label>
             <input type="text" value={daam} onChange={e => handleChange("daam", e.target.value)}
-              className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
+              className="w-full min-w-0 border-2 border-green-200 rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
           </div>
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Sq. Ft.</label>
+          <div className="min-w-0">
+            <label className="block text-gray-700 font-medium mb-1 text-xs sm:text-sm">Sq. Ft.</label>
             <input type="text" value={sqft} onChange={e => handleChange("sqft", e.target.value)}
-              className="w-full border-2 border-green-200 rounded-lg px-4 py-2 focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
+              className="w-full min-w-0 border-2 border-green-200 rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base focus:border-[#006d4e] focus:ring-2 focus:ring-[#006d4e] outline-none" placeholder="0" />
           </div>
         </div>
       </CardContent>
@@ -249,6 +249,23 @@ const Index = () => {
   const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
   const { t } = useLanguage();
+  const [showCalculator, setShowCalculator] = useState(false);
+  const calcRef = useRef<HTMLDivElement | null>(null);
+
+  // When calculator opens on small screens, scroll it into view so it's fully visible
+  useEffect(() => {
+    if (showCalculator) {
+      // when opened, scroll the calculator into view
+      if (calcRef.current) {
+        calcRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      // when closed, scroll page to top
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  }, [showCalculator]);
 
   // Helper function to convert relative image URLs to absolute URLs
   const getAbsoluteImageUrl = (imageUrl: string | File | null): string => {
@@ -306,8 +323,10 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      {/* Hero Section with Green Scenery and Rain */}
-      <section className="relative h-[700px] flex items-center justify-center overflow-hidden bg-[#006d4e]">
+      {/* Hero Section with Green Scenery and Rain.
+          When calculator is opened we let the hero expand (h-auto) so the background image + rain cover the calculator.
+          This keeps all behavior unchanged and avoids rendering the calculator twice. */}
+      <section className={`relative flex items-center justify-center overflow-visible bg-[#006d4e] ${showCalculator ? 'h-auto' : 'h-[700px]'}`}>
         {/* Beautiful Green Scenery Background */}
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -399,12 +418,43 @@ const Index = () => {
               </Button>
             </div>
           </div>
+          
+          {/* Land Unit Converter Toggle Button */}
+          <div className="mt-6 flex items-center justify-between bg-white/90 p-4 rounded-xl shadow-md max-w-xs mx-auto gap-4">
+            <span className="text-[#006d4e] font-semibold text-lg">Land Unit Converter</span>
+            <Button
+              onClick={() => setShowCalculator(!showCalculator)}
+              className="bg-[#006d4e] hover:bg-[#005a3f] text-white
+                        flex items-center justify-center transition-transform transform hover:scale-110 p-2 rounded-full"
+            >
+              {showCalculator ? (
+                <ChevronDown className="h-6 w-6" />
+              ) : (
+                <ChevronRight className="h-6 w-6" />
+              )}
+            </Button>
+          </div>
 
-          {/* Land Unit Conversion Calculator */}
-          <LandUnitCalculator />
-        </div>
-      </section>
-
+          {/* Calculator is rendered here inside the hero when toggled so the background & rain naturally extend behind it.
+              Use negative top margin to remove the gap so the calculator sits flush under the toggle box on all sizes. */}
+          {showCalculator && (
+            <div ref={calcRef} className="-mt-6 px-4 sm:px-6 md:px-0 max-w-4xl mx-auto z-20">
+              <LandUnitCalculator />
+              {/* Close button below the calculator */}
+              <div className="flex justify-center mt-3">
+                <Button
+                  onClick={() => setShowCalculator(false)}
+                  className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-4 py-2 shadow-md"
+                  aria-label="Close calculator"
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          )}
+         </div>
+       </section>
+      
       {/* Featured Listings */}
       <section className="py-20 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in-up">
